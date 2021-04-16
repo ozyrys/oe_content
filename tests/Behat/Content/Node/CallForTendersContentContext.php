@@ -88,7 +88,7 @@ class CallForTendersContentContext extends RawDrupalContext {
 
     // Set default fields.
     $scope->addFields([
-      'oe_subject' => 'http://data.europa.eu/uxp/10',
+      'oe_subject' => 'http://data.europa.eu/uxp/1010',
       'oe_content_content_owner' => 'http://publications.europa.eu/resource/authority/corporate-body/AGRI',
     ]);
   }
