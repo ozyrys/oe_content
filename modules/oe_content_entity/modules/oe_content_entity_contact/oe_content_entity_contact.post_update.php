@@ -133,3 +133,24 @@ function oe_content_entity_contact_post_update_00007(): void {
     $field_storage_config->create($reference_field)->save();
   }
 }
+
+/**
+ * Set address subfields as optional.
+ */
+function oe_content_entity_contact_post_update_00008(): void {
+  $file_storage = new FileStorage(drupal_get_path('module', 'oe_content_entity_contact') . '/config/post_updates/00008_address_optional');
+  $storage = \Drupal::entityTypeManager()->getStorage('field_config');
+
+  $config_ids = [
+    'field.field.oe_contact.oe_general.oe_address',
+    'field.field.oe_contact.oe_press.oe_address',
+  ];
+  foreach ($config_ids as $config_id) {
+    $values = $file_storage->read($config_id);
+    $field_setting = $storage->load($values['id']);
+    if ($field_setting) {
+      $storage->updateFromStorageRecord($field_setting, $values);
+      $field_setting->save();
+    }
+  }
+}
