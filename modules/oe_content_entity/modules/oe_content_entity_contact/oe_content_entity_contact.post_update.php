@@ -138,19 +138,32 @@ function oe_content_entity_contact_post_update_00007(): void {
  * Set address subfields as optional.
  */
 function oe_content_entity_contact_post_update_00008(): void {
-  $file_storage = new FileStorage(drupal_get_path('module', 'oe_content_entity_contact') . '/config/post_updates/00008_address_optional');
   $storage = \Drupal::entityTypeManager()->getStorage('field_config');
 
+  $optional_fields = [
+    'addressLine1',
+    'addressLine2',
+    'postalCode',
+    'sortingCode',
+    'locality',
+    'administrativeArea',
+  ];
   $config_ids = [
-    'field.field.oe_contact.oe_general.oe_address',
-    'field.field.oe_contact.oe_press.oe_address',
+    'oe_contact.oe_general.oe_address',
+    'oe_contact.oe_press.oe_address',
   ];
   foreach ($config_ids as $config_id) {
-    $values = $file_storage->read($config_id);
-    $field_setting = $storage->load($values['id']);
-    if ($field_setting) {
-      $storage->updateFromStorageRecord($field_setting, $values);
-      $field_setting->save();
+    $field_config = $storage->load($config_id);
+    if ($field_config) {
+      $field_overrides = $field_config->getSetting('field_overrides');
+      foreach ($optional_fields as $optional_field) {
+        if (!isset($field_overrides[$optional_field])) {
+          // Default configuration is set, so we can update it.
+          $field_overrides[$optional_field]['override'] = 'optional';
+        }
+      }
+      $field_config->setSetting('field_overrides', $field_overrides);
+      $field_config->save();
     }
   }
 }
