@@ -44,10 +44,8 @@ trait EntityReferenceTrait {
         $query->condition($group);
       }
     }
-    else {
-      if (!empty($configuration['target_bundles']) && is_array($configuration['target_bundles'])) {
-        $query->condition($target_entity_type->getKey('bundle'), $configuration['target_bundles'], 'IN');
-      }
+    elseif (!empty($configuration['target_bundles']) && is_array($configuration['target_bundles'])) {
+      $query->condition($target_entity_type->getKey('bundle'), $configuration['target_bundles'], 'IN');
     }
     // Transform titles to ids and maintain the comma separated format.
     $items = explode(',', $labels);
@@ -56,8 +54,8 @@ trait EntityReferenceTrait {
     foreach ($items as $item) {
       if ($label_key = $target_entity_type->getKey('label')) {
         $query_instance = clone $query;
-        $query_instance->condition($label_key, $item, 'CONTAINS');
-        $results = $query->execute();
+        $query_instance->condition($label_key, $item, '=');
+        $results = $query_instance->execute();
         $ids[] = reset($results);
       }
     }
