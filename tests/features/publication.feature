@@ -133,7 +133,7 @@ Feature: Publication content creation
     And the following General Contact entity:
       | Name          | A general contact |
     And the following "Publication" Content entity:
-      | Page title             | Publication demo page                 |
+      | Title             | Publication demo page                 |
       | Introduction           | Publication introduction text         |
       | Identifier code        | PUB/100/1                             |
       | Resource type          | Agenda                                |
