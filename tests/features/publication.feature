@@ -131,20 +131,20 @@ Feature: Publication content creation
       | name       | file       |
       | Document 1 | sample.pdf |
     And the following General Contact entity:
-      | Name          | A general contact |
+      | Name | A general contact |
     And the following "Publication" Content entity:
-      | Title             | Publication demo page                 |
-      | Introduction           | Publication introduction text         |
-      | Identifier code        | PUB/100/1                             |
-      | Resource type          | Agenda                                |
-      | Publication date       | 2019-02-21                            |
-      | Last update date       | 2019-02-22                            |
-      | Files                  | Document 1                            |
-      | Body text              | Publication body text                 |
-      | Contact                | A general contact                     |
-      | Author                 | Directorate-General for Budget        |
-      | Related department     | Directorate-General for Communication |
-      | Teaser                 | Teaser                                |
+      | Title              | Publication demo page                 |
+      | Introduction       | Publication introduction text         |
+      | Identifier code    | PUB/100/1                             |
+      | Resource type      | Agenda                                |
+      | Publication date   | 2019-02-21                            |
+      | Last update date   | 2019-02-22                            |
+      | Files              | Document 1                            |
+      | Body text          | Publication body text                 |
+      | Contact            | A general contact                     |
+      | Author             | Directorate-General for Budget        |
+      | Related department | Directorate-General for Communication |
+      | Teaser             | Teaser                                |
     When I am visiting the "Publication demo page" content
     And I click "Edit"
     And I press "Remove"
